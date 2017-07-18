@@ -4,6 +4,7 @@ import os
 import hashlib
 import time
 from lxml import etree
+from talk import talk
 
 class WechatInterface:
     def __init__(self):
@@ -36,7 +37,8 @@ class WechatInterface:
         toUser = xml.find('ToUserName').text
         if msgType == 'text':
             content = xml.find('Content').text
-            return self.render.reply(fromUser, toUser, int(time.time()), content)
+            text = talk(content)
+            return self.render.reply(fromUser, toUser, int(time.time()), text)
 
 
 
